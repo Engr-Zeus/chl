@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Delta State Executive Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#1e3a8a",
+              "background-light": "#f8fafc",
+              "background-dark": "#0f172a",
+              "card-light": "#ffffff",
+              "card-dark": "#1e293b",
+            },
+            fontFamily: {
+              display: ["Inter", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.5rem",
+            },
+          },
+        },
+      };
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .chart-gradient {
+            background: linear-gradient(180deg, rgba(30, 58, 138, 0.1) 0%, rgba(30, 58, 138, 0) 100%);
+        }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex">
+<div id="sidebar-root"></div>
+<script>
+  function toggleRegisters() {
+    const menu = document.getElementById('registersMenu');
+    const icon = document.getElementById('registersIcon');
+    menu.classList.toggle('hidden');
+    if (menu.classList.contains('hidden')) {
+      icon.textContent = 'expand_more';
+    } else {
+      icon.textContent = 'expand_less';
+    }
+  }
+  
+  fetch('sidebar.html').then(r=>r.text()).then(html=>{
+    document.getElementById('sidebar-root').innerHTML = html;
+    document.querySelectorAll('#sidebar-root nav a').forEach(a=>{
+      const href = a.getAttribute('href');
+      if(href && (location.pathname.endsWith(href) || location.href.endsWith(href))) a.classList.add('active-nav');
+    });
+  });
+</script>
+<main class="flex-1 flex flex-col min-w-0">
+<header class="h-20 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-8 flex items-center justify-between sticky top-0 z-10">
+<h2 class="text-xl font-bold">Executive Overview</h2>
+<div class="flex items-center gap-6">
+<div class="relative w-96 hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-slate-50 dark:bg-slate-800 border-none rounded-lg text-sm focus:ring-2 focus:ring-primary/20" placeholder="Search Reports" type="text"/>
+</div>
+<button class="relative p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full">
+<span class="material-icons-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
+</button>
+<button class="bg-primary hover:bg-blue-800 text-white px-5 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2">
+                    Download Report
+                </button>
+</div>
+</header>
+<div class="p-8 space-y-6 overflow-y-auto">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="bg-card-light dark:bg-card-dark p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Revenue (Today)</p>
+<span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-0.5 rounded-full">+2.5%</span>
+</div>
+<h3 class="text-2xl font-bold mb-4">₦4.2M</h3>
+<div class="space-y-2">
+<div class="h-1.5 w-full bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[65%] rounded-full"></div>
+</div>
+<p class="text-[10px] text-slate-500">65% of daily collection target</p>
+</div>
+</div>
+<div class="bg-card-light dark:bg-card-dark p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Revenue (WTD)</p>
+<span class="text-[10px] font-bold text-red-600 bg-red-50 dark:bg-red-900/30 px-2 py-0.5 rounded-full">-1.2%</span>
+</div>
+<h3 class="text-2xl font-bold mb-4">₦26.4M</h3>
+<div class="space-y-2">
+<div class="h-1.5 w-full bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[78%] rounded-full"></div>
+</div>
+<p class="text-[10px] text-slate-500">68% of weekly collection target</p>
+</div>
+</div>
+<div class="bg-card-light dark:bg-card-dark p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Revenue (MTD)</p>
+<span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-0.5 rounded-full">+5.8%</span>
+</div>
+<h3 class="text-2xl font-bold mb-4">₦82.1M</h3>
+<div class="space-y-2">
+<div class="h-1.5 w-full bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[92%] rounded-full"></div>
+</div>
+<p class="text-[10px] text-slate-500">Target progress for January</p>
+</div>
+</div>
+<div class="bg-card-light dark:bg-card-dark p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Revenue (YTD)</p>
+<span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-0.5 rounded-full">+12.4%</span>
+</div>
+<h3 class="text-2xl font-bold mb-4">₦82.1M</h3>
+<div class="space-y-2">
+<div class="h-1.5 w-full bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[85%] rounded-full"></div>
+</div>
+<p class="text-[10px] text-slate-500">Annual goal: ₦987M</p>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="lg:col-span-2 space-y-6">
+<div class="bg-card-light dark:bg-card-dark p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm h-full flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<div>
+<h3 class="font-bold text-lg">Revenue Performance Trend</h3>
+<p class="text-sm text-slate-500">Collection efficiency across the last 30 days</p>
+</div>
+<div class="flex bg-slate-50 dark:bg-slate-800 p-1 rounded-lg">
+<button class="px-4 py-1.5 text-[10px] font-bold uppercase rounded-md bg-white dark:bg-slate-700 shadow-sm">Daily</button>
+<button class="px-4 py-1.5 text-[10px] font-bold uppercase text-slate-500">Monthly</button>
+</div>
+</div>
+<div class="flex-1 relative min-h-[220px]">
+<svg class="w-full h-full text-primary" preserveAspectRatio="none" viewBox="0 0 800 200">
+<defs>
+<linearGradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="currentColor" stop-opacity="0.1"></stop>
+<stop offset="100%" stop-color="currentColor" stop-opacity="0"></stop>
+</linearGradient>
+</defs>
+<path d="M0,150 Q100,140 150,110 T300,80 T450,120 T600,60 T800,40 V200 H0 Z" fill="url(#chartGradient)"></path>
+<path d="M0,150 Q100,140 150,110 T300,80 T450,120 T600,60 T800,40" fill="none" stroke="currentColor" stroke-width="3"></path>
+<circle cx="800" cy="40" fill="currentColor" r="4"></circle>
+</svg>
+<div class="flex justify-between mt-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2">
+<span>Jan 1</span>
+<span>Jan 5</span>
+<span>Jan 10</span>
+<span>Jan 15</span>
+<span>Jan 20</span>
+<span>Jan 24</span>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-slate-100 dark:border-slate-800">
+<div class="flex justify-between items-center mb-4">
+<h4 class="font-bold text-sm">Variance Insight</h4>
+<div class="flex items-center gap-1 text-[10px] text-emerald-600 font-bold uppercase">
+<span class="material-icons-outlined text-xs">trending_up</span>
+                                    Performing Above Estimates
+                                </div>
+</div>
+<div class="grid grid-cols-2 gap-8">
+<div>
+<p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">Estimated Revenue</p>
+<p class="text-xl font-bold">₦84.5M</p>
+</div>
+<div>
+<p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">Actual Revenue</p>
+<p class="text-xl font-bold text-primary dark:text-blue-400">₦82.1M</p>
+</div>
+</div>
+<div class="mt-6">
+<div class="flex justify-between text-[10px] font-bold mb-2">
+<span class="text-slate-500 uppercase">Monthly Collection Data</span>
+<span class="text-emerald-600">+₦1.6M (+5.2%)</span>
+</div>
+<div class="h-2 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-emerald-500 w-[96%] rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-slate-900 text-white rounded-xl p-6 flex flex-col">
+<h3 class="text-lg font-bold mb-8">Compliance Insights</h3>
+<div class="text-center mb-8">
+<p class="text-5xl font-black text-emerald-400 mb-2">91.6%</p>
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">Overall Compliance Rate</p>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-8">
+<div class="bg-white/5 p-4 rounded-xl text-center">
+<p class="text-2xl font-bold text-blue-400">9,436</p>
+<p class="text-[10px] font-bold text-slate-400 uppercase">Total Vehicles</p>
+</div>
+<div class="bg-white/5 p-4 rounded-xl text-center">
+<p class="text-2xl font-bold text-emerald-400">8,520</p>
+<p class="text-[10px] font-bold text-slate-400 uppercase">Compliant</p>
+</div>
+</div>
+<div class="flex-1">
+<h4 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-4">Non-Compliant Vehicles</h4>
+<div class="space-y-2 overflow-hidden">
+<div class="p-3 bg-white/5 border border-white/10 rounded-lg group hover:bg-white/10 transition-colors">
+<div class="flex justify-between items-start mb-1">
+<p class="font-bold text-xs">ABC-1234 - Haulage Truck 01</p>
+</div>
+<p class="text-[10px] text-red-400 font-medium mb-1">Expired haulage permit</p>
+<p class="text-[10px] text-slate-500">Kilometer 5 Eleme Road</p>
+</div>
+<div class="p-3 bg-white/5 border border-white/10 rounded-lg">
+<p class="font-bold text-xs mb-1">XYZ-5678 - Freight Vehicle 02</p>
+<p class="text-[10px] text-red-400 font-medium mb-1">Outstanding payment</p>
+<p class="text-[10px] text-slate-500">Kilometer 15 Ihiala Road</p>
+</div>
+<div class="p-3 bg-white/5 border border-white/10 rounded-lg">
+<p class="font-bold text-xs mb-1">DEF-9012 - Transport Unit 03</p>
+<p class="text-[10px] text-red-400 font-medium mb-1">Missing documentation</p>
+<p class="text-[10px] text-slate-500">5 days non-compliant</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="lg:col-span-2 bg-slate-900 text-white rounded-xl overflow-hidden flex flex-col">
+<div class="p-6 border-b border-white/10 flex justify-between items-center">
+<h3 class="font-bold text-lg">Vehicle Compliance Activity Log</h3>
+<a class="text-xs font-bold text-blue-400 flex items-center gap-1" href="#">View All <span class="material-icons-outlined text-sm">east</span></a>
+</div>
+<div class="flex-1 overflow-x-auto">
+<table class="w-full text-left text-xs">
+<thead class="bg-white/5 text-slate-400 font-bold uppercase tracking-widest">
+<tr>
+<th class="px-6 py-4">Timestamp</th>
+<th class="px-6 py-4">Vehicle Plate</th>
+<th class="px-6 py-4">Location</th>
+<th class="px-6 py-4">Haulage Tag ID</th>
+<th class="px-6 py-4">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-white/5">
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 text-slate-400">14:22:01</td>
+<td class="px-6 py-4 font-bold">LAG-882-QK</td>
+<td class="px-6 py-4 text-slate-400">Zone 4 (Ikeja)</td>
+<td class="px-6 py-4 text-slate-400 font-mono">RF-9920-X1</td>
+<td class="px-6 py-4"><span class="px-2 py-1 rounded bg-emerald-500/10 text-emerald-400 text-[10px] font-black uppercase flex items-center gap-1 w-fit"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Compliant</span></td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 text-slate-400">14:21:55</td>
+<td class="px-6 py-4 font-bold">ABJ-110-XA</td>
+<td class="px-6 py-4 text-slate-400">Zone 1 (Lekki)</td>
+<td class="px-6 py-4 text-slate-400 font-mono">RF-1244-A9</td>
+<td class="px-6 py-4"><span class="px-2 py-1 rounded bg-red-500/10 text-red-400 text-[10px] font-black uppercase flex items-center gap-1 w-fit"><span class="w-1.5 h-1.5 rounded-full bg-red-500"></span> Non-Compliant</span></td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 text-slate-400">14:21:42</td>
+<td class="px-6 py-4 font-bold">KND-404-ZZ</td>
+<td class="px-6 py-4 text-slate-400">Zone 4 (Ikeja)</td>
+<td class="px-6 py-4 text-slate-400 font-mono">RF-0021-P8</td>
+<td class="px-6 py-4"><span class="px-2 py-1 rounded bg-emerald-500/10 text-emerald-400 text-[10px] font-black uppercase flex items-center gap-1 w-fit"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Compliant</span></td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors border-none">
+<td class="px-6 py-4 text-slate-400">14:21:30</td>
+<td class="px-6 py-4 font-bold">OG-551-TY</td>
+<td class="px-6 py-4 text-slate-400">Zone 2 (Yaba)</td>
+<td class="px-6 py-4 text-slate-400 font-mono">RF-8723-M2</td>
+<td class="px-6 py-4"><span class="px-2 py-1 rounded bg-emerald-500/10 text-emerald-400 text-[10px] font-black uppercase flex items-center gap-1 w-fit"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Compliant</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="bg-card-light dark:bg-card-dark p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-bold text-lg">LGA Performance</h3>
+<a class="text-[10px] font-bold text-primary dark:text-blue-400 uppercase" href="#">View All</a>
+</div>
+<div class="space-y-6">
+<div class="space-y-1.5">
+<div class="flex justify-between text-xs">
+<span class="font-semibold">Warri South</span>
+<span class="text-slate-500">₦8.1M</span>
+</div>
+<div class="h-1.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[90%] rounded-full"></div>
+</div>
+</div>
+<div class="space-y-1.5">
+<div class="flex justify-between text-xs">
+<span class="font-semibold">Isoko South</span>
+<span class="text-slate-500">₦6.4M</span>
+</div>
+<div class="h-1.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[70%] rounded-full"></div>
+</div>
+</div>
+<div class="space-y-1.5">
+<div class="flex justify-between text-xs">
+<span class="font-semibold">Sapele</span>
+<span class="text-slate-500">₦4.9M</span>
+</div>
+<div class="h-1.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[55%] rounded-full"></div>
+</div>
+</div>
+<div class="space-y-1.5">
+<div class="flex justify-between text-xs">
+<span class="font-semibold">Oshimili North</span>
+<span class="text-slate-500">₦4.2M</span>
+</div>
+<div class="h-1.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[45%] rounded-full"></div>
+</div>
+</div>
+<div class="space-y-1.5">
+<div class="flex justify-between text-xs">
+<span class="font-semibold">Ndokwa East</span>
+<span class="text-slate-500">₦3.8M</span>
+</div>
+<div class="h-1.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[38%] rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-slate-900 text-white p-8 rounded-xl flex flex-col md:flex-row items-center gap-8 relative overflow-hidden group">
+<div class="absolute inset-0 bg-blue-600/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="w-16 h-16 rounded-2xl bg-blue-600/20 flex items-center justify-center flex-shrink-0 z-10">
+<span class="material-icons-outlined text-blue-400 text-3xl">lightbulb</span>
+</div>
+<div class="flex-1 text-center md:text-left z-10">
+<h3 class="text-xl font-bold mb-2">Revenue Recovery Insight</h3>
+<p class="text-slate-400 text-sm leading-relaxed max-w-3xl">Our Intelligence system has flagged a 14.2% increase in commercial vehicle compliance within the last quarter. The automated enforcement in the Southern Industrial Belt is projected to recover an additional <span class="text-blue-400 font-bold">₦2.4M</span> by end of fiscal year.</p>
+</div>
+<div class="flex gap-4 z-10">
+<button class="px-6 py-2.5 rounded-lg text-sm font-bold bg-white/10 hover:bg-white/20 transition-colors">Dismiss</button>
+<button class="px-6 py-2.5 rounded-lg text-sm font-bold bg-blue-600 hover:bg-blue-700 transition-colors">Full Analysis</button>
+</div>
+</div>
+<div class="flex flex-col md:flex-row justify-between pt-4 pb-8 border-t border-slate-200 dark:border-slate-800 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+<span>Last Updated: Today at 10:25 AM</span>
+<span>© 2026 State Revenue Authority • System v4.2.0</span>
+</div>
+</div>
+</main>
+<button class="fixed bottom-6 right-6 lg:hidden w-14 h-14 bg-primary text-white rounded-full shadow-xl flex items-center justify-center z-50">
+<span class="material-icons-outlined">menu</span>
+</button>
+
+</body></html>

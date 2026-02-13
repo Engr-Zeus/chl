@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Stakeholder Settlements &amp; Remittance - Delta State IRS</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#1e3a8a",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#0f172a",
+                        "card-light": "#ffffff",
+                        "card-dark": "#1e293b",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                    },
+                },
+            },
+        };
+    </script>
+<style type="text/tailwindcss">
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .chart-bar {
+            transition: height 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex">
+<div id="sidebar-root"></div>
+<script>
+  function toggleRegisters() {
+    const menu = document.getElementById('registersMenu');
+    const icon = document.getElementById('registersIcon');
+    menu.classList.toggle('hidden');
+    if (menu.classList.contains('hidden')) {
+      icon.textContent = 'expand_more';
+    } else {
+      icon.textContent = 'expand_less';
+    }
+  }
+  
+    fetch('sidebar.html').then(r=>r.text()).then(html=>{
+        document.getElementById('sidebar-root').innerHTML = html;
+        document.querySelectorAll('#sidebar-root nav a').forEach(a=>{
+            const href = a.getAttribute('href');
+            if(href && (location.pathname.endsWith(href) || location.href.endsWith(href))) a.classList.add('active-nav');
+        });
+    });
+</script>
+<main class="flex-1 flex flex-col min-w-0">
+<header class="h-20 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-8 flex items-center justify-between sticky top-0 z-20">
+<div class="flex flex-col">
+<h2 class="text-xl font-bold">Financial Settlements</h2>
+<p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Stakeholder Remittance Portal</p>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-primary hover:bg-blue-800 text-white px-5 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">add_circle</span>
+                    Initiate Settlement
+                </button>
+<button class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">file_download</span>
+                    Export
+                </button>
+</div>
+</header>
+<div class="p-8 space-y-8 overflow-y-auto">
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="bg-card-light dark:bg-card-dark p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-2">
+<p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Total Amount Due</p>
+<span class="material-symbols-outlined text-blue-500 text-xl">payments</span>
+</div>
+<div class="flex items-baseline gap-2">
+<h3 class="text-2xl font-bold">₦145.2M</h3>
+</div>
+<p class="text-[10px] text-slate-400 mt-1">Across 124 stakeholders</p>
+</div>
+<div class="bg-card-light dark:bg-card-dark p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-2">
+<p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Total Settled</p>
+<span class="material-symbols-outlined text-emerald-500 text-xl">check_circle</span>
+</div>
+<div class="flex items-baseline gap-2">
+<h3 class="text-2xl font-bold">₦112.8M</h3>
+</div>
+<p class="text-[10px] text-emerald-600 mt-1 font-bold">77.6% Completion</p>
+</div>
+<div class="bg-card-light dark:bg-card-dark p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-2">
+<p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Pending Settlements</p>
+<span class="material-symbols-outlined text-amber-500 text-xl">pending_actions</span>
+</div>
+<div class="flex items-baseline gap-2">
+<h3 class="text-2xl font-bold">₦28.4M</h3>
+</div>
+<p class="text-[10px] text-slate-400 mt-1">12 processing today</p>
+</div>
+<div class="bg-card-light dark:bg-card-dark p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-2">
+<p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Overdue</p>
+<span class="material-symbols-outlined text-red-500 text-xl">warning</span>
+</div>
+<div class="flex items-baseline gap-2">
+<h3 class="text-2xl font-bold text-red-600">₦4.0M</h3>
+</div>
+<p class="text-[10px] text-red-500 mt-1 font-bold">8 Accounts Flagged</p>
+</div>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="bg-slate-900 p-6 rounded-xl border border-slate-700 shadow-lg">
+    <div class="flex justify-between items-center mb-8">
+    <h3 class="font-bold text-sm flex items-center gap-2 uppercase tracking-tight text-white">
+    <span class="material-symbols-outlined text-blue-400 text-xl">schedule</span>
+                                Settlement Aging
+                            </h3>
+    <span class="text-[10px] font-bold text-slate-300 uppercase tracking-widest">Outstanding Balances</span>
+    </div>
+    <div class="flex items-end justify-around h-48 gap-4 px-4">
+    <div class="flex flex-col items-center flex-1">
+    <div class="w-full bg-blue-900/40 rounded-t-lg relative group h-[80%]">
+    <div class="absolute bottom-0 w-full bg-blue-500 rounded-t-lg h-[100%] transition-all"></div>
+    <div class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-slate-800 text-white text-[10px] px-2 py-1 rounded shadow-lg border border-slate-700">₦18.0M</div>
+    </div>
+    <span class="text-[10px] font-bold text-slate-300 mt-3 uppercase">0-7 Days</span>
+    </div>
+    <div class="flex flex-col items-center flex-1">
+    <div class="w-full bg-blue-900/40 rounded-t-lg relative group h-[80%]">
+    <div class="absolute bottom-0 w-full bg-blue-400 rounded-t-lg h-[45%] transition-all"></div>
+    <div class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-slate-800 text-white text-[10px] px-2 py-1 rounded shadow-lg border border-slate-700">₦7.0M</div>
+    </div>
+    <span class="text-[10px] font-bold text-slate-300 mt-3 uppercase">8-30 Days</span>
+    </div>
+    <div class="flex flex-col items-center flex-1">
+    <div class="w-full bg-blue-900/40 rounded-t-lg relative group h-[80%]">
+    <div class="absolute bottom-0 w-full bg-red-400 rounded-t-lg h-[25%] transition-all"></div>
+    <div class="absolute -top-8 left/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-slate-800 text-white text-[10px] px-2 py-1 rounded shadow-lg border border-slate-700">₦3.4M</div>
+    </div>
+    <span class="text-[10px] font-bold text-slate-300 mt-3 uppercase">31-60+ Days</span>
+    </div>
+    </div>
+    </div>
+<div class="bg-card-light dark:bg-card-dark p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-bold text-sm flex items-center gap-2 uppercase tracking-tight">
+<span class="material-symbols-outlined text-primary text-xl">group</span>
+                            Stakeholder Distribution
+                        </h3>
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Payment Status</span>
+</div>
+<div class="space-y-6">
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<div>
+<p class="text-[11px] font-bold uppercase">States/Authorities</p>
+<p class="text-[10px] text-slate-400">45 Participants</p>
+</div>
+<span class="text-[11px] font-bold">70% Settled</span>
+</div>
+<div class="h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[70%]"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<div>
+<p class="text-[11px] font-bold uppercase">Integrators</p>
+<p class="text-[10px] text-slate-400">12 Partners</p>
+</div>
+<span class="text-[11px] font-bold text-emerald-600">85% Settled</span>
+</div>
+<div class="h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-emerald-500 w-[85%]"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<div>
+<p class="text-[11px] font-bold uppercase">Terminal Operators</p>
+<p class="text-[10px] text-slate-400">67 Holders</p>
+</div>
+<span class="text-[11px] font-bold text-emerald-600">92% Settled</span>
+</div>
+<div class="h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-emerald-500 w-[92%]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-card-light dark:bg-card-dark rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+<div class="p-6 border-b border-slate-200 dark:border-slate-800 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<h3 class="font-bold text-lg">Detailed Settlement Log</h3>
+<div class="flex items-center gap-3">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-2 top-1/2 -translate-y-1/2 text-slate-400 text-base">search</span>
+<input class="pl-8 pr-3 py-1.5 bg-slate-100 dark:bg-slate-800 border-none rounded text-[11px] focus:ring-1 focus:ring-primary w-48" placeholder="Search Stakeholder..." type="text"/>
+</div>
+<div class="flex bg-slate-100 dark:bg-slate-800 rounded-lg p-1">
+<button class="px-3 py-1 text-[10px] font-bold uppercase rounded bg-white dark:bg-slate-700 shadow-sm">All</button>
+<button class="px-3 py-1 text-[10px] font-bold uppercase text-slate-500">Overdue</button>
+</div>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-xs">
+<thead>
+<tr class="bg-slate-50 dark:bg-slate-800/50 text-slate-500 font-bold uppercase tracking-widest">
+<th class="px-6 py-4 whitespace-nowrap">Settlement ID</th>
+<th class="px-6 py-4">Stakeholder Name</th>
+<th class="px-6 py-4">Channel</th>
+<th class="px-6 py-4">Amount Due</th>
+<th class="px-6 py-4">Amount Settled</th>
+<th class="px-6 py-4">Status</th>
+<th class="px-6 py-4">Date</th>
+<th class="px-6 py-4 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4 font-mono font-medium text-primary dark:text-blue-400">SET-901-2241</td>
+<td class="px-6 py-4">
+<p class="font-bold">Anambra State Revenue Service</p>
+<p class="text-[10px] text-slate-400 uppercase tracking-tighter">Origin State</p>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-slate-400">account_balance</span>
+                                        Bank Transfer
+                                    </div>
+</td>
+<td class="px-6 py-4 font-bold text-slate-900 dark:text-white">₦1,240,000.00</td>
+<td class="px-6 py-4 font-bold text-emerald-600">₦1,240,000.00</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400 text-[10px] font-bold uppercase flex items-center gap-1 w-fit">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Settled
+                                    </span>
+</td>
+<td class="px-6 py-4 text-slate-500 whitespace-nowrap">Oct 24, 2023</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="px-3 py-1.5 bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded text-[10px] font-bold uppercase hover:bg-slate-100">Details</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4 font-mono font-medium text-primary dark:text-blue-400">SET-901-2242</td>
+<td class="px-6 py-4">
+<p class="font-bold">PayGate Integrator Solutions</p>
+<p class="text-[10px] text-slate-400 uppercase tracking-tighter">Integrator</p>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-slate-400">webhook</span>
+                                        Wallet API
+                                    </div>
+</td>
+<td class="px-6 py-4 font-bold text-slate-900 dark:text-white">₦450,000.00</td>
+<td class="px-6 py-4 font-bold text-slate-400">₦0.00</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded-full bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 text-[10px] font-bold uppercase flex items-center gap-1 w-fit">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> Pending
+                                    </span>
+</td>
+<td class="px-6 py-4 text-slate-500 whitespace-nowrap">Oct 24, 2023</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="px-3 py-1.5 bg-primary/10 text-primary dark:text-blue-400 rounded text-[10px] font-bold uppercase hover:bg-primary hover:text-white transition-colors">Upload Proof</button>
+<button class="px-3 py-1.5 bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded text-[10px] font-bold uppercase hover:bg-slate-100">Details</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4 font-mono font-medium text-primary dark:text-blue-400">SET-901-2243</td>
+<td class="px-6 py-4">
+<p class="font-bold">Asaba Central Hub</p>
+<p class="text-[10px] text-slate-400 uppercase tracking-tighter">Terminal Operator</p>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-slate-400">payments</span>
+                                        Cash/Pos
+                                    </div>
+</td>
+<td class="px-6 py-4 font-bold text-slate-900 dark:text-white">₦2,100,000.00</td>
+<td class="px-6 py-4 font-bold text-slate-400">₦0.00</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 text-[10px] font-bold uppercase flex items-center gap-1 w-fit">
+<span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> Due
+                                    </span>
+</td>
+<td class="px-6 py-4 text-slate-500 whitespace-nowrap">Oct 23, 2023</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="px-3 py-1.5 bg-primary/10 text-primary dark:text-blue-400 rounded text-[10px] font-bold uppercase hover:bg-primary hover:text-white transition-colors">Upload Proof</button>
+<button class="px-3 py-1.5 bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded text-[10px] font-bold uppercase hover:bg-slate-100">Details</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4 font-mono font-medium text-primary dark:text-blue-400">SET-901-2244</td>
+<td class="px-6 py-4">
+<p class="font-bold">Haulage Integrated Hub</p>
+<p class="text-[10px] text-slate-400 uppercase tracking-tighter">Integrator</p>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-slate-400">account_balance</span>
+                                        Bank Transfer
+                                    </div>
+</td>
+<td class="px-6 py-4 font-bold text-slate-900 dark:text-white">₦890,500.00</td>
+<td class="px-6 py-4 font-bold text-emerald-600">₦890,500.00</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400 text-[10px] font-bold uppercase flex items-center gap-1 w-fit">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Settled
+                                    </span>
+</td>
+<td class="px-6 py-4 text-slate-500 whitespace-nowrap">Oct 22, 2023</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="px-3 py-1.5 bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded text-[10px] font-bold uppercase hover:bg-slate-100">Details</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-6 border-t border-slate-200 dark:border-slate-800 flex justify-between items-center bg-white dark:bg-slate-900/50">
+<p class="text-xs text-slate-500">Showing 1-10 of 124 settlements</p>
+<div class="flex gap-2">
+<button class="p-1.5 rounded border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-lg">chevron_left</span>
+</button>
+<button class="px-3 py-1.5 rounded border border-primary bg-primary text-white text-xs font-bold">1</button>
+<button class="px-3 py-1.5 rounded border border-slate-200 dark:border-slate-700 text-xs font-bold hover:bg-slate-50 dark:hover:bg-slate-800">2</button>
+<button class="p-1.5 rounded border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
+<span class="material-symbols-outlined text-lg">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<div class="flex flex-col md:flex-row justify-between pt-4 pb-8 border-t border-slate-200 dark:border-slate-800 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+<span>System Status: Fully Synchronized • Next scheduled disbursement: 24h</span>
+<span>© 2023 State Revenue Authority • Finance System v4.2.0</span>
+</div>
+</div>
+</main>
+<button class="fixed bottom-6 right-6 lg:hidden w-14 h-14 bg-primary text-white rounded-full shadow-xl flex items-center justify-center z-50">
+<span class="material-symbols-outlined">menu</span>
+</button>
+
+</body></html>

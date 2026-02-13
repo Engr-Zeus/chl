@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Enforcement Operations Command Center</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#1e3a8a",
+              "background-light": "#f8fafc",
+              "background-dark": "#0f172a",
+              "card-light": "#ffffff",
+              "card-dark": "#1e293b",
+            },
+            fontFamily: {
+              display: ["Inter", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.5rem",
+            },
+          },
+        },
+      };
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .sidebar-active { background-color: #f1f5f9; border-right: 4px solid #1e3a8a; }
+        .dark .sidebar-active { background-color: #334155; border-right-color: #3b82f6; }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 flex">
+<div id="sidebar-root"></div>
+<script>  function toggleRegisters() {
+    const menu = document.getElementById('registersMenu');
+    const icon = document.getElementById('registersIcon');
+    menu.classList.toggle('hidden');
+    if (menu.classList.contains('hidden')) {
+      icon.textContent = 'expand_more';
+    } else {
+      icon.textContent = 'expand_less';
+    }
+  }
+    fetch('sidebar.html').then(r=>r.text()).then(html=>{
+    document.getElementById('sidebar-root').innerHTML = html;
+    document.querySelectorAll('#sidebar-root nav a').forEach(a=>{
+      const href = a.getAttribute('href');
+      if(href && (location.pathname.endsWith(href) || location.href.endsWith(href))) a.classList.add('active-nav');
+    });
+  });
+</script>
+<main class="flex-1 flex flex-col min-w-0">
+<header class="h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-8 flex items-center justify-between sticky top-0 z-10 shrink-0">
+<div class="flex items-center gap-4">
+<h2 class="text-lg font-semibold">Enforcement Operations</h2>
+<span class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 text-[10px] font-bold uppercase tracking-wider">
+<span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+                        Live Ops Active
+                    </span>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-icons-round absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
+<input class="pl-10 pr-4 py-2 w-72 bg-white dark:bg-slate-800 border-0 rounded-lg text-sm shadow-sm focus:ring-2 focus:ring-primary" placeholder="Search RFID or Plate..." type="text"/>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-white dark:bg-slate-800 shadow-sm text-slate-600 dark:text-slate-400">
+<span class="material-icons-round">notifications</span>
+</button>
+<button class="flex items-center gap-2 bg-primary dark:bg-blue-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold shadow-md hover:bg-blue-800 transition-colors">
+<span class="material-icons-round text-lg">local_police</span>
+                        Dispatch Unit
+                    </button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-white dark:bg-slate-800 shadow-sm text-slate-600 dark:text-slate-400" onclick="document.documentElement.classList.toggle('dark')">
+<span class="material-icons-round">dark_mode</span>
+</button>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-8">
+<div class="grid grid-cols-3 gap-6 mb-6">
+<div class="bg-white dark:bg-card-dark p-6 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800">
+<div class="flex justify-between items-start mb-4">
+<h3 class="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">Total Scans (24h)</h3>
+<span class="material-icons-round text-primary text-xl">sensors</span>
+</div>
+<div class="flex flex-col">
+<span class="text-3xl font-bold mb-2 text-slate-900 dark:text-white">42,890</span>
+<span class="text-xs font-semibold text-emerald-500 flex items-center gap-1">
+<span class="material-icons-round text-xs">arrow_upward</span>
+                            +14% vs yesterday
+                        </span>
+</div>
+</div>
+<div class="bg-white dark:bg-card-dark p-6 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800">
+<div class="flex justify-between items-start mb-4">
+<h3 class="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">Unique Cards Identified</h3>
+<span class="material-icons-round text-primary text-xl">credit_card</span>
+</div>
+<div class="flex flex-col">
+<span class="text-3xl font-bold mb-2 text-slate-900 dark:text-white">18,245</span>
+<span class="text-xs text-slate-400">Coverage across 12 zones</span>
+</div>
+</div>
+<div class="bg-white dark:bg-card-dark p-6 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800">
+<div class="flex justify-between items-start mb-4">
+<h3 class="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">Scan Success Rate</h3>
+<span class="material-icons-round text-primary text-xl">check_circle</span>
+</div>
+<div class="flex flex-col">
+<span class="text-3xl font-bold mb-2 text-slate-900 dark:text-white">98.2%</span>
+<div class="w-full h-1.5 bg-slate-100 dark:bg-slate-700 rounded-full mt-2 overflow-hidden">
+<div class="h-full bg-emerald-500 w-[98.2%]"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-4 gap-6 mb-8">
+<div class="bg-white dark:bg-card-dark p-5 rounded-xl border border-slate-100 dark:border-slate-800 flex items-center gap-4">
+<div class="w-12 h-12 rounded-full border-4 border-emerald-500 flex items-center justify-center">
+<span class="text-xs font-bold">74%</span>
+</div>
+<div>
+<p class="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase">Overall Compliance</p>
+<p class="text-base font-bold text-emerald-600">Excellent</p>
+<p class="text-xs font-medium text-slate-500 dark:text-slate-400">+2.1% from last hour</p>
+</div>
+</div>
+<div class="bg-white dark:bg-card-dark p-5 rounded-xl border border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<div>
+<p class="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase">Non-Compliant Vehicles</p>
+<p class="text-2xl font-bold text-red-500">42</p>
+<p class="text-xs font-medium text-slate-500 dark:text-slate-400">Flagged in current shift</p>
+</div>
+<span class="material-icons-round text-red-100 dark:text-red-900/30 text-4xl">warning</span>
+</div>
+<div class="bg-white dark:bg-card-dark p-5 rounded-xl border border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<div>
+<p class="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase">Active Scanners</p>
+<p class="text-2xl font-bold">128</p>
+<p class="text-xs font-medium text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                            All systems online
+                        </p>
+</div>
+<span class="material-icons-round text-blue-100 dark:text-blue-900/30 text-4xl">wifi_tethering</span>
+</div>
+<div class="bg-white dark:bg-card-dark p-5 rounded-xl border border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<div>
+<p class="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase">Total Enforcement Zones</p>
+<p class="text-2xl font-bold">32</p>
+<p class="text-xs font-medium text-slate-500 dark:text-slate-400">Peak hour: 09:00 AM</p>
+</div>
+<span class="material-icons-round text-slate-100 dark:text-slate-800 text-4xl">grid_view</span>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-6 mb-8">
+<div class="col-span-2 bg-white dark:bg-card-dark rounded-xl border border-slate-100 dark:border-slate-800 flex flex-col shadow-sm">
+<div class="p-5 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
+<div>
+<h3 class="font-bold text-slate-800 dark:text-white">Location Register</h3>
+<p class="text-xs text-slate-400">Real-time RFID reader network status</p>
+</div>
+<div class="flex gap-2">
+<button class="p-1.5 rounded-md border border-slate-200 dark:border-slate-700 text-slate-400"><span class="material-icons-round text-lg">center_focus_weak</span></button>
+<button class="p-1.5 rounded-md border border-slate-200 dark:border-slate-700 text-slate-400"><span class="material-icons-round text-lg">unfold_more</span></button>
+</div>
+</div>
+<div class="flex-1 relative bg-slate-50 dark:bg-slate-900/50 m-5 rounded-xl border border-dashed border-slate-200 dark:border-slate-700 overflow-hidden min-h-[400px]">
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="text-slate-400 text-sm font-medium">Interactive Geo-Spatial Map Layer</span>
+</div>
+<div class="absolute top-[20%] left-[30%] w-3 h-3 bg-emerald-500 rounded-full border-2 border-white dark:border-slate-800 shadow-sm"></div>
+<div class="absolute top-[50%] left-[45%] w-3 h-3 bg-emerald-500 rounded-full border-2 border-white dark:border-slate-800 shadow-sm"></div>
+<div class="absolute bottom-[30%] right-[35%] w-3 h-3 bg-red-500 rounded-full border-2 border-white dark:border-slate-800 shadow-sm"></div>
+<div class="absolute top-[40%] right-[15%] w-2 h-2 bg-blue-400 rounded-full border-2 border-white dark:border-slate-800 shadow-sm opacity-50"></div>
+</div>
+<div class="p-5 flex items-center gap-6 text-xs font-semibold uppercase text-slate-600 dark:text-slate-400">
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> 24 Active Readers</div>
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-red-500"></span> 3 Offline Alerts</div>
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-blue-400"></span> 8 Mobile Units</div>
+</div>
+</div>
+<div class="space-y-6">
+<div class="bg-primary dark:bg-blue-900 rounded-xl p-6 text-white shadow-xl relative overflow-hidden group">
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-6">
+<h3 class="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">Last Scanned Card</h3>
+<span class="text-xs font-mono text-slate-500 dark:text-slate-400">14:45:22</span>
+</div>
+<div class="mb-6">
+<p class="text-[9px] uppercase tracking-tighter opacity-70 mb-1">Plate Number</p>
+<p class="text-3xl font-black tracking-tight">IMO-882-QK</p>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-8">
+<div>
+<p class="text-[9px] uppercase opacity-70 mb-1">Vehicle Type</p>
+<p class="text-xs font-bold">Heavy Haulage</p>
+</div>
+<div>
+<p class="text-[9px] uppercase opacity-70 mb-1">Haulage ID</p>
+<p class="text-xs font-bold">HT-22904-X</p>
+</div>
+</div>
+<button class="w-full py-3 bg-emerald-500/20 border border-emerald-400/30 rounded-lg flex items-center justify-between px-4 hover:bg-emerald-500/30 transition-all">
+<span class="flex items-center gap-2 text-sm font-bold text-emerald-100">
+<span class="material-icons-round text-lg">verified</span>
+                                    COMPLIANT
+                                </span>
+<span class="material-icons-round">chevron_right</span>
+</button>
+</div>
+<div class="absolute -right-12 -top-12 w-48 h-48 bg-white/5 rounded-full blur-3xl"></div>
+<div class="absolute -left-12 -bottom-12 w-48 h-48 bg-blue-400/10 rounded-full blur-3xl"></div>
+</div>
+<div class="bg-white dark:bg-card-dark rounded-xl p-5 border border-slate-100 dark:border-slate-800 shadow-sm">
+<h3 class="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-4">Vehicle Profile</h3>
+<div class="flex items-center gap-4 mb-6">
+<div class="w-12 h-12 rounded-lg bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-slate-400">
+<span class="material-icons-round text-3xl">person</span>
+</div>
+<div>
+<p class="text-sm font-bold">Chinedu Okafor Logistics Ltd.</p>
+<p class="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">Corporate Tax ID: 22910384</p>
+</div>
+</div>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-[10px] font-bold mb-1.5">
+<span class="text-slate-400 uppercase">Compliance History</span>
+<span class="text-emerald-500">100% (Clean)</span>
+</div>
+<div class="h-1.5 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="h-full bg-emerald-500 w-full"></div>
+</div>
+</div>
+<div class="flex justify-between items-center py-2 border-t border-slate-50 dark:border-slate-800">
+<span class="text-[10px] font-bold text-slate-400 uppercase">Permit Validity</span>
+<span class="text-[10px] font-bold text-slate-600 dark:text-slate-300">Expires Dec 2023</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-4 gap-6 mb-8">
+<div class="col-span-3 bg-white dark:bg-card-dark rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm overflow-hidden flex flex-col">
+<div class="p-5 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
+<h3 class="font-bold text-slate-800 dark:text-white">Detailed Scan History Log</h3>
+<div class="flex gap-4">
+<span class="flex items-center gap-1.5 text-[9px] font-bold text-slate-500 uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> RFID
+                            </span>
+<span class="flex items-center gap-1.5 text-[9px] font-bold text-slate-500 uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> ANPR
+                            </span>
+</div>
+</div>
+<div class="flex-1">
+<table class="w-full text-left text-xs">
+<thead>
+<tr class="bg-slate-50/50 dark:bg-slate-800/50 text-[10px] font-bold text-slate-400 uppercase border-b border-slate-100 dark:border-slate-800">
+<th class="px-5 py-4">Card ID / Vehicle</th>
+<th class="px-5 py-4">Timestamp</th>
+<th class="px-5 py-4">Reader Type</th>
+<th class="px-5 py-4">Location</th>
+<th class="px-5 py-4">Haulage ID</th>
+<th class="px-5 py-4 text-right">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/80 transition-colors">
+<td class="px-5 py-4">
+<div class="font-bold">IMO-7821-XW</div>
+<div class="text-[9px] text-slate-400">Ref: 98110-332</div>
+</td>
+<td class="px-5 py-4">14:52:10</td>
+<td class="px-5 py-4"><span class="px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 text-[9px] font-bold uppercase">RFID Fixed</span></td>
+<td class="px-5 py-4">Owerri-Aba Rd (P1)</td>
+<td class="px-5 py-4 font-mono text-slate-400">HAU-99201</td>
+<td class="px-5 py-4 text-right">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 text-[9px] font-bold uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Compliant
+                                        </span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/80 transition-colors">
+<td class="px-5 py-4">
+<div class="font-bold">LAG-222-MN</div>
+<div class="text-[9px] text-slate-400">Ref: 98110-335</div>
+</td>
+<td class="px-5 py-4">14:51:58</td>
+<td class="px-5 py-4"><span class="px-2 py-0.5 rounded bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 text-[9px] font-bold uppercase">ANPR Mobile</span></td>
+<td class="px-5 py-4">Okigwe Junction</td>
+<td class="px-5 py-4 font-mono text-slate-400">HAU-12844</td>
+<td class="px-5 py-4 text-right">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-red-50 dark:bg-red-900/20 text-red-600 text-[9px] font-bold uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-red-500"></span> Expired Tag
+                                        </span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/80 transition-colors">
+<td class="px-5 py-4">
+<div class="font-bold">ABJ-556-QR</div>
+<div class="text-[9px] text-slate-400">Ref: 98110-338</div>
+</td>
+<td class="px-5 py-4">14:51:42</td>
+<td class="px-5 py-4"><span class="px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 text-[9px] font-bold uppercase">RFID Fixed</span></td>
+<td class="px-5 py-4">Port Harcourt Exp</td>
+<td class="px-5 py-4 font-mono text-slate-400">HAU-55102</td>
+<td class="px-5 py-4 text-right">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 text-[9px] font-bold uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Compliant
+                                        </span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/80 transition-colors">
+<td class="px-5 py-4">
+<div class="font-bold">ENU-901-ZZ</div>
+<div class="text-[9px] text-slate-400">Ref: 98110-340</div>
+</td>
+<td class="px-5 py-4">14:51:25</td>
+<td class="px-5 py-4"><span class="px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 text-[9px] font-bold uppercase">RFID Fixed</span></td>
+<td class="px-5 py-4">Owerri-Aba Rd (P1)</td>
+<td class="px-5 py-4 font-mono text-slate-400">HAU-88229</td>
+<td class="px-5 py-4 text-right">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-orange-50 dark:bg-orange-900/20 text-orange-600 text-[9px] font-bold uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-orange-500"></span> Unregistered
+                                        </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 bg-slate-50 dark:bg-slate-800/30 flex justify-center border-t border-slate-100 dark:border-slate-800">
+<button class="text-[10px] font-bold text-slate-400 uppercase hover:text-primary transition-colors">Load Previous Scans</button>
+</div>
+</div>
+<div class="bg-slate-900 dark:bg-slate-950 rounded-xl p-6 text-white shadow-xl flex flex-col">
+<div class="flex items-center gap-3 mb-8">
+<span class="material-icons-round text-blue-400">analytics</span>
+<h3 class="text-xs font-bold uppercase tracking-widest">Lifecycle Intelligence</h3>
+</div>
+<div class="space-y-6 flex-1">
+<div>
+<p class="text-[9px] font-bold text-slate-500 uppercase mb-4 tracking-wider">Active Trips in Progress</p>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between items-center mb-1.5">
+<span class="text-[10px] font-bold">HAU-99201</span>
+<span class="text-[9px] font-mono text-blue-400">82% EST.</span>
+</div>
+<div class="h-1 bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-blue-500 w-[82%]"></div>
+</div>
+<p class="text-[8px] text-slate-500 mt-1 uppercase">Warri ➔ Sapele (Lumber)</p>
+</div>
+<div>
+<div class="flex justify-between items-center mb-1.5">
+<span class="text-[10px] font-bold">HAU-88214</span>
+<span class="text-[9px] font-mono text-emerald-400">ON-TIME</span>
+</div>
+<div class="h-1 bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-emerald-500 w-[45%]"></div>
+</div>
+<p class="text-[8px] text-slate-500 mt-1 uppercase">Warri ➔ Asaba (Petroleum)</p>
+</div>
+</div>
+</div>
+<div class="pt-6 border-t border-white/5">
+<p class="text-[9px] font-bold text-red-400 uppercase mb-4 tracking-wider flex items-center gap-2">
+<span class="material-icons-round text-xs">navigation</span>
+                                Route Deviations
+                            </p>
+<div class="bg-red-500/10 border border-red-500/20 rounded-lg p-3">
+<div class="flex justify-between items-center mb-1">
+<span class="text-[10px] font-bold text-red-100 uppercase">IMO-112-AB</span>
+<span class="text-[9px] font-bold text-red-400">0.4km Off-Route</span>
+</div>
+<p class="text-[8px] text-red-200/60 mb-3">Umuaka Connector Road Detected</p>
+<button class="w-full py-1.5 bg-red-500 text-white text-[10px] font-bold rounded hover:bg-red-600 transition-colors uppercase">Intercept</button>
+</div>
+</div>
+</div>
+<div class="mt-8 flex items-center justify-between">
+<div>
+<p class="text-[9px] font-bold text-slate-500 uppercase tracking-widest mb-1">Fleet Compliance</p>
+<p class="text-3xl font-bold">92.4%</p>
+</div>
+<span class="material-icons-round text-emerald-500 text-3xl">verified</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-4 gap-6">
+<div class="col-span-2 bg-white dark:bg-card-dark rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm p-5">
+<div class="flex justify-between items-center mb-6">
+<div class="flex items-center gap-2">
+<span class="material-icons-round text-amber-500">assignment_late</span>
+<h3 class="font-bold text-sm">System Error Log</h3>
+</div>
+<span class="text-[9px] font-bold text-slate-400 uppercase tracking-tighter">Auto-clears in 24h</span>
+</div>
+<div class="space-y-4">
+<div class="flex gap-4 p-3 rounded-lg bg-slate-50 dark:bg-slate-800/40 border-l-4 border-amber-500">
+<span class="text-[10px] font-mono text-slate-400 pt-1">14:48:02</span>
+<div>
+<p class="text-xs font-bold underline cursor-pointer">Network Latency Warning</p>
+<p class="text-[10px] text-slate-500">Scanner #881 (Asaba Road) reporting 450ms ping delay.</p>
+</div>
+</div>
+<div class="flex gap-4 p-3 rounded-lg bg-slate-50 dark:bg-slate-800/40 border-l-4 border-red-500">
+<span class="text-[10px] font-mono text-slate-400 pt-1">14:35:19</span>
+<div>
+<p class="text-xs font-bold underline cursor-pointer">Database Write Failed</p>
+<p class="text-[10px] text-slate-500">Duplicate entry detected for RFID Tag RF-1244-A9.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-primary dark:bg-blue-900 rounded-xl p-5 text-white shadow-lg flex flex-col relative overflow-hidden">
+<div class="relative z-10 flex flex-col h-full">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-[10px] font-bold uppercase tracking-widest">Revenue Overview (Recent Scans)</h3>
+<span class="material-icons-round opacity-50">account_balance_wallet</span>
+</div>
+<div class="grid grid-cols-1 gap-6 flex-1">
+<div>
+<p class="text-[9px] uppercase opacity-70 mb-1">Real-Time Capture</p>
+<p class="text-2xl font-bold italic tracking-tighter">₦4.28M</p>
+<p class="text-[9px] text-emerald-400 font-bold mt-1 flex items-center gap-1">
+<span class="material-icons-round text-xs">trending_up</span>
+                                    +14.2% Peak Efficiency
+                                </p>
+</div>
+<div>
+<p class="text-[9px] uppercase opacity-70 mb-1">Pending Enforcement</p>
+<p class="text-2xl font-bold italic tracking-tighter">₦1.12M</p>
+<p class="text-[9px] opacity-70 mt-1">POTENTIAL RECOVERY</p>
+</div>
+</div>
+<div class="flex gap-3 mt-6">
+<button class="flex-1 py-2 bg-white/10 hover:bg-white/20 text-[10px] font-bold rounded uppercase transition-all">Analyze Leaks</button>
+<button class="flex-1 py-2 bg-emerald-500 hover:bg-emerald-600 text-[10px] font-bold rounded uppercase transition-all">Direct Deposit View</button>
+</div>
+</div>
+<span class="material-icons-round absolute -right-4 -top-4 text-[120px] opacity-5">account_balance_wallet</span>
+</div>
+<div class="bg-white dark:bg-card-dark rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm p-5 flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-bold text-sm">System Health Monitor</h3>
+<span class="flex items-center gap-1.5 text-[9px] font-bold text-emerald-500 uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> All Nodes Stable
+                        </span>
+</div>
+<div class="space-y-6 flex-1">
+<div>
+<p class="text-[10px] font-bold text-slate-400 uppercase mb-2">Server Latency</p>
+<div class="flex items-end gap-2 mb-2">
+<span class="text-xl font-bold">24ms</span>
+<span class="material-icons-round text-emerald-500 text-sm mb-1">trending_down</span>
+</div>
+<div class="h-1 bg-slate-100 dark:bg-slate-700 rounded-full">
+<div class="h-full bg-emerald-500 w-[15%]"></div>
+</div>
+</div>
+<div>
+<p class="text-[10px] font-bold text-slate-400 uppercase mb-2">Reader Connectivity</p>
+<div class="flex items-end gap-2 mb-2">
+<span class="text-xl font-bold">92%</span>
+<span class="material-icons-round text-amber-500 text-sm mb-1">cell_wifi</span>
+</div>
+<div class="h-1 bg-slate-100 dark:bg-slate-700 rounded-full">
+<div class="h-full bg-blue-500 w-[92%]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-6 bg-white dark:bg-card-dark rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm p-5">
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-bold text-sm">Enforcement Alerts</h3>
+<button class="text-[10px] font-bold text-slate-400 hover:text-red-500 uppercase tracking-widest">Clear All</button>
+</div>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-3 bg-red-50/50 dark:bg-red-900/10 rounded-lg border border-red-100 dark:border-red-900/20 group hover:border-red-300 transition-all">
+<div class="flex items-center gap-4">
+<span class="material-icons-round text-red-500">report_problem</span>
+<div>
+<p class="text-xs font-bold">Plate LAG-445-XP: Expired Permit</p>
+<p class="text-[10px] text-slate-500">Zone 4 (Ikeja Road) • 2 mins ago</p>
+</div>
+</div>
+<button class="text-slate-400 opacity-0 group-hover:opacity-100 transition-all"><span class="material-icons-round">open_in_new</span></button>
+</div>
+<div class="flex items-center justify-between p-3 bg-amber-50/50 dark:bg-amber-900/10 rounded-lg border border-amber-100 dark:border-amber-900/20 group hover:border-amber-300 transition-all">
+<div class="flex items-center gap-4">
+<span class="material-icons-round text-amber-500">warning</span>
+<div>
+<p class="text-xs font-bold">Plate ABJ-110-XA: Tampered RFID</p>
+<p class="text-[10px] text-slate-500">Zone 1 (Lekki Checkpoint) • 5 mins ago</p>
+</div>
+</div>
+<button class="text-slate-400 opacity-0 group-hover:opacity-100 transition-all"><span class="material-icons-round">open_in_new</span></button>
+</div>
+</div>
+</div>
+<footer class="mt-12 flex justify-between items-center text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+<p>Last Command Pulse: 14:46:01 PM</p>
+<p>© 2023 Delta State Internal Revenue Service • Ops Unit V2.1.0</p>
+</footer>
+</div>
+</main>
+
+</body></html>

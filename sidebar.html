@@ -1,0 +1,81 @@
+<aside class="w-64 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hidden lg:flex flex-col sticky top-0 h-screen">
+  <div class="p-6 flex items-center gap-3">
+    <div class="w-10 h-10 bg-emerald-100 dark:bg-emerald-900 rounded-full flex items-center justify-center">
+      <img alt="Delta State Seal" class="w-8 h-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6oCN5j5J8iqo_yHvV_Hh0DkuLAmlwOHpAcCzEwUDr-AjonV9pVbCLYkx64NdWlphwxVBWfgBEDb4JQSC36Nr-mY6NoKyVrTOLRGf_3Yzx4IpLLBy4giyTGyIkN9YLDHndirgP0rn_5nKWOYv2ZW4sRLAIf5sasHPh7MTb0YnWEH_aKbsmm3piGYcltxxMAHaAvXywsxrppafBL7YataGevmDH30JT3SlcDs78WyLlVgiSEpQmrDFIcIN-KyEPeduUqb4k0ckmKDl4"/>
+    </div>
+    <div>
+      <h1 class="font-bold text-xs uppercase tracking-wider text-primary dark:text-blue-400">Delta State</h1>
+      <p class="text-[10px] text-slate-500 uppercase">Internal Revenue Service</p>
+    </div>
+  </div>
+  <nav class="flex-1 px-4 space-y-1">
+    <a class="flex items-center gap-3 px-4 py-2.5 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg text-sm transition-colors" href="Dashboard.html">
+      <span class="material-symbols-outlined text-[20px]">grid_view</span>
+      <span>Dashboard</span>
+    </a>
+    <a class="flex items-center gap-3 px-4 py-2.5 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg text-sm transition-colors" href="Vendor.html">
+      <span class="material-symbols-outlined text-[20px]">storefront</span>
+      <span>Vendor Management</span>
+    </a>
+    <button onclick="toggleRegisters()" style="border: none; background: none; cursor: pointer;" class="w-full flex items-center gap-3 px-4 py-2.5 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg text-sm transition-colors text-left">
+      <span class="material-symbols-outlined text-[20px]">inventory_2</span>
+      <span>Registers</span>
+      <span id="registersIcon" class="material-symbols-outlined text-[18px] ml-auto">expand_more</span>
+    </button>
+    <div id="registersMenu" class="pl-6 space-y-1 hidden">
+      <a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg text-sm transition-colors" href="register.html">
+        <span class="material-symbols-outlined text-[18px]">directions_car</span>
+        <span>Vehicle Register</span>
+      </a>
+      <a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg text-sm transition-colors" href="LocationRegister.html">
+        <span class="material-symbols-outlined text-[18px]">place</span>
+        <span>Location Register</span>
+      </a>
+      <a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg text-sm transition-colors" href="ContactRegister.html">
+        <span class="material-symbols-outlined text-[18px]">contacts</span>
+        <span>Contact Register</span>
+      </a>
+      <a aria-disabled="true" class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 opacity-50 rounded-lg text-sm cursor-not-allowed" href="#">
+        <span class="material-symbols-outlined text-[18px]">people</span>
+        <span>Taxpayer Register (coming soon)</span>
+      </a>
+    </div>
+    <a class="flex items-center gap-3 px-4 py-2.5 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg text-sm transition-colors" href="Haulage_Tag.html">
+      <span class="material-symbols-outlined text-[20px]">local_shipping</span>
+      <span>Haulage Tag</span>
+    </a>
+    <a class="flex items-center gap-3 px-4 py-2.5 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg text-sm transition-colors" href="Transactions.html">
+      <span class="material-symbols-outlined text-[20px]">receipt_long</span>
+      <span>Transactions</span>
+    </a>
+    <a class="flex items-center gap-3 px-4 py-2.5 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg text-sm transition-colors" href="Settlements.html">
+      <span class="material-symbols-outlined text-[20px]">account_balance_wallet</span>
+      <span>Settlements</span>
+    </a>
+    <a class="flex items-center gap-3 px-4 py-2.5 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg text-sm transition-colors" href="DebtNote.html">
+      <span class="material-symbols-outlined text-[20px]">note_add</span>
+      <span>Debt Note</span>
+    </a>
+    <a class="flex items-center gap-3 px-4 py-2.5 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg text-sm transition-colors" href="enforcement.html">
+      <span class="material-symbols-outlined text-[20px]">gavel</span>
+      <span>Enforcement</span>
+    </a>
+    <a class="flex items-center gap-3 px-4 py-2.5 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg text-sm transition-colors" href="Insights.html">
+      <span class="material-symbols-outlined text-[20px]">analytics</span>
+      <span>Insights &amp; Analytics</span>
+    </a>
+  </nav>
+  <div class="p-4 border-t border-slate-200 dark:border-slate-800">
+    <a class="flex items-center gap-3 px-4 py-2.5 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg text-sm mb-4" href="#">
+      <span class="material-symbols-outlined text-[20px]">settings</span>
+      <span>Settings</span>
+    </a>
+    <div class="flex items-center gap-3 px-4 py-2">
+      <img alt="Admin User" class="w-8 h-8 rounded-full bg-slate-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkvzjzWTu_X1lZfDko88NBztpcO8TL_y90pJYvYjTSwihOQKcS48Jb0EGwWcDWHMEeTapSZ25pPBp87mkkMSkGWzDziPP6jQwm-umX8ymR6QNNRYjTmHAJwD_B3aNobyeqdzHXcz3M--y-wD0uAQCnVjypr1nxx4NdkeJKkb4HqKVJ_iHJ4sBB9xqPly_OCJYfekQK4ed-K03kzNB-uLe8o5hgI_HlddiH9fD5gjIYr0ZuFg8MTNr3Vtmkhr3ItMW6D3fj74xvNe-y"/>
+      <div class="overflow-hidden">
+        <p class="text-sm font-semibold truncate">Admin User</p>
+        <p class="text-[10px] text-slate-500 uppercase">Executive Chairman</p>
+      </div>
+    </div>
+  </div>
+</aside>

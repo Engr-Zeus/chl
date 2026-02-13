@@ -1,0 +1,52 @@
+Sidebar
+
+	Add Credit Profile Top level Navigation Page
+
+Dashboard
+	News and insights info to be placed at the top of the dashboard (Preferably between Executive overview and Search)
+	Below the Revenue amount add 
+		Revenue heads: Haulage, Haulage Tags, Enforcement Charge
+	Remove Download Report button and change it to insights and analytics
+	Change notifications button to notifications icon
+	Include in settings the ability to define budget and estimate to feed Variance insight
+	Remove Recovery Insight pending when an Intelligent system in online
+
+
+Vendor Management
+	Remove revenue from vendor
+	Category
+		Tag
+		Haulage
+		Enforcement
+		3 roles - General
+		Tag + Haulage - Tag-H
+		Tag + Enforcement - Tag-E
+		Haulage + Enforcement - Haul-E
+
+
+Vehicle Registry 
+	Change vehicle registry to Register
+	have the following as sum pages
+		Vehicle Register
+		Location Register
+		Contact Register
+		Taxpayer register
+
+
+Haulage Tag
+	Change Tag inventory to Tag Enumerations
+	Change Sales History to Assignment History
+	Change actions button to Block / Suspend, Unblock, Assign, Reassign
+
+
+Transactions Page
+	Stakeholder Revenue Distribution to be available to only Cyber 1
+	Add totals to Transaction log (change from transaction audit log)
+
+
+Enforcement Page 
+	Button to toggle Map between showing all Enforcement Zones and Collection Zones to Showing only Enforcement Zones and only Collection Zones
+	When each zone is clicked, information about that zone should be shown (Location Name, Vendor, Agent, etc)
+
+
+

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vendor Management Insights - Delta State IRS</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#1e3a8a",
+              "background-light": "#f8fafc",
+              "background-dark": "#0f172a",
+              "card-light": "#ffffff",
+              "card-dark": "#1e293b",
+            },
+            fontFamily: {
+              display: ["Inter", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.5rem",
+            },
+          },
+        },
+      };
+    </script>
+<style type="text/tailwindcss">
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-nav {
+            @apply bg-blue-50 dark:bg-blue-900/30 text-primary dark:text-blue-400 font-medium;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex">
+<div id="sidebar-root"></div>
+<script>
+  function toggleRegisters() {
+    const menu = document.getElementById('registersMenu');
+    const icon = document.getElementById('registersIcon');
+    menu.classList.toggle('hidden');
+    if (menu.classList.contains('hidden')) {
+      icon.textContent = 'expand_more';
+    } else {
+      icon.textContent = 'expand_less';
+    }
+  }
+  
+  fetch('sidebar.html').then(r=>r.text()).then(html=>{
+    document.getElementById('sidebar-root').innerHTML = html;
+    document.querySelectorAll('#sidebar-root nav a').forEach(a=>{
+      const href = a.getAttribute('href');
+      if(href && (location.pathname.endsWith(href) || location.href.endsWith(href))) a.classList.add('active-nav');
+    });
+  });
+</script>
+<main class="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto">
+<header class="h-20 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-8 flex items-center justify-between sticky top-0 z-10 shrink-0">
+<h2 class="text-xl font-bold">Vendor Management</h2>
+<div class="flex items-center gap-6">
+<div class="relative w-96 hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-slate-50 dark:bg-slate-800 border-none rounded-lg text-sm focus:ring-2 focus:ring-primary/20" placeholder="Search vendors, TIN, category..." type="text"/>
+</div>
+<button class="relative p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
+</button>
+<button class="bg-primary hover:bg-blue-800 text-white px-5 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">person_add</span>
+                Add New Vendor
+            </button>
+</div>
+</header>
+<div class="p-8 space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="bg-card-light dark:bg-card-dark p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Total Vendors</p>
+<span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-0.5 rounded-full">+12</span>
+</div>
+<h3 class="text-2xl font-bold mb-4">3</h3>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-slate-400">group</span>
+<p class="text-[10px] text-slate-500 font-medium">Verified across all LGAs</p>
+</div>
+</div>
+<div class="bg-card-light dark:bg-card-dark p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Total Agents</p>
+<span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-0.5 rounded-full">+4.2%</span>
+</div>
+<h3 class="text-2xl font-bold mb-4">29</h3>
+<div class="h-1.5 w-full bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="h-full bg-blue-500 w-[60%] rounded-full"></div>
+</div>
+<p class="text-[10px] text-slate-500 mt-2">Active field representation</p>
+</div>
+<div class="bg-card-light dark:bg-card-dark p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Active Vendors (%)</p>
+<span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-0.5 rounded-full">+2.1%</span>
+</div>
+<h3 class="text-2xl font-bold mb-4">94.8%</h3>
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-emerald-500"></div>
+<p class="text-[10px] text-slate-500 font-medium">Currently operational</p>
+</div>
+</div>
+<div class="bg-card-light dark:bg-card-dark p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Revenue from Vendors</p>
+<span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-0.5 rounded-full">+15.4%</span>
+</div>
+<h3 class="text-2xl font-bold mb-4">₦142.8M</h3>
+<p class="text-[10px] text-slate-500 uppercase font-bold tracking-tight">MTD Collection Growth</p>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="bg-card-light dark:bg-card-dark rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col">
+<div class="p-5 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
+<h3 class="font-bold text-sm">Top Performing Vendors</h3>
+<span class="material-symbols-outlined text-slate-400 text-lg">trending_up</span>
+</div>
+<div class="p-5 space-y-4">
+<div class="flex items-center gap-4 group">
+<div class="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/40 text-primary dark:text-blue-400 flex items-center justify-center font-bold text-xs shrink-0">1</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-semibold truncate">Imo Express Logistics</p>
+<p class="text-[10px] text-slate-500 uppercase">Haulage</p>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold">₦12.4M</p>
+<p class="text-[10px] text-emerald-600 font-bold">+5%</p>
+</div>
+</div>
+<div class="flex items-center gap-4 group">
+<div class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 flex items-center justify-center font-bold text-xs shrink-0">2</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-semibold truncate">Asaba Park Management</p>
+<p class="text-[10px] text-slate-500 uppercase">Transport</p>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold">₦9.1M</p>
+<p class="text-[10px] text-emerald-600 font-bold">+2%</p>
+</div>
+</div>
+<div class="flex items-center gap-4 group">
+<div class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 flex items-center justify-center font-bold text-xs shrink-0">3</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-semibold truncate">Eastern Haulage Ltd</p>
+<p class="text-[10px] text-slate-500 uppercase">Industrial</p>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold">₦7.8M</p>
+<p class="text-[10px] text-red-500 font-bold">-1%</p>
+</div>
+</div>
+<div class="flex items-center gap-4 group">
+<div class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 flex items-center justify-center font-bold text-xs shrink-0">4</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-semibold truncate">Bluecrest Revenue Services</p>
+<p class="text-[10px] text-slate-500 uppercase">Agency</p>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold">₦6.2M</p>
+<p class="text-[10px] text-emerald-600 font-bold">+8%</p>
+</div>
+</div>
+</div>
+<div class="p-4 mt-auto border-t border-slate-100 dark:border-slate-800">
+<button class="w-full py-2 text-xs font-bold text-primary dark:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded transition-colors">View All Metrics</button>
+</div>
+</div>
+<div class="lg:col-span-2 bg-card-light dark:bg-card-dark rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden flex flex-col">
+<div class="p-5 border-b border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<h3 class="font-bold text-lg">Vendor Directory</h3>
+<div class="flex items-center gap-3">
+<select class="text-xs bg-slate-50 dark:bg-slate-800 border-none rounded-lg focus:ring-1 focus:ring-primary/20 py-2 pr-10">
+<option>All Categories</option>
+<option>Haulage</option>
+<option>Transport</option>
+<option>Market</option>
+</select>
+<select class="text-xs bg-slate-50 dark:bg-slate-800 border-none rounded-lg focus:ring-1 focus:ring-primary/20 py-2 pr-10">
+<option>All Status</option>
+<option>Compliant</option>
+<option>Pending</option>
+<option>Flagged</option>
+</select>
+</div>
+</div>
+<div class="flex-1 overflow-x-auto">
+<table class="w-full text-left text-sm border-collapse">
+<thead class="bg-slate-50 dark:bg-slate-800/50 text-[10px] font-bold text-slate-500 uppercase tracking-widest border-b border-slate-200 dark:border-slate-800">
+<tr>
+<th class="px-6 py-4">Vendor Name</th>
+<th class="px-6 py-4">Category</th>
+<th class="px-6 py-4">Total Agents</th>
+<th class="px-6 py-4">Compliance</th>
+<th class="px-6 py-4">Total Revenue</th>
+<th class="px-6 py-4 text-center">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-semibold text-slate-900 dark:text-slate-100">Quick-Transit Co.</span>
+<span class="text-[10px] text-slate-500">TIN: 2990-129482</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded">Transport</span>
+</td>
+<td class="px-6 py-4 font-medium">248</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-bold text-xs uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                        Full
+                                    </span>
+</td>
+<td class="px-6 py-4 font-bold text-slate-900 dark:text-slate-100">₦2,840,000</td>
+<td class="px-6 py-4 text-center">
+<button class="p-1 hover:bg-slate-200 dark:hover:bg-slate-700 rounded transition-colors">
+<span class="material-symbols-outlined text-lg">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-semibold text-slate-900 dark:text-slate-100">Metro Market Link</span>
+<span class="text-[10px] text-slate-500">TIN: 1002-384721</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-xs px-2 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 rounded">Agencies</span>
+</td>
+<td class="px-6 py-4 font-medium">152</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1.5 text-amber-600 dark:text-amber-400 font-bold text-xs uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                                        Review
+                                    </span>
+</td>
+<td class="px-6 py-4 font-bold text-slate-900 dark:text-slate-100">₦1,120,500</td>
+<td class="px-6 py-4 text-center">
+<button class="p-1 hover:bg-slate-200 dark:hover:bg-slate-700 rounded transition-colors">
+<span class="material-symbols-outlined text-lg">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-semibold text-slate-900 dark:text-slate-100">Heavy Load Carriers</span>
+<span class="text-[10px] text-slate-500">TIN: 4421-992018</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-xs px-2 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 rounded">Haulage</span>
+</td>
+<td class="px-6 py-4 font-medium">412</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-bold text-xs uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                        Full
+                                    </span>
+</td>
+<td class="px-6 py-4 font-bold text-slate-900 dark:text-slate-100">₦4,560,000</td>
+<td class="px-6 py-4 text-center">
+<button class="p-1 hover:bg-slate-200 dark:hover:bg-slate-700 rounded transition-colors">
+<span class="material-symbols-outlined text-lg">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-semibold text-slate-900 dark:text-slate-100">Apex Allied Services</span>
+<span class="text-[10px] text-slate-500">TIN: 8872-441203</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-xs px-2 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-400 rounded">Service</span>
+</td>
+<td class="px-6 py-4 font-medium">89</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1.5 text-red-600 dark:text-red-400 font-bold text-xs uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-red-500"></span>
+                                        Overdue
+                                    </span>
+</td>
+<td class="px-6 py-4 font-bold text-slate-900 dark:text-slate-100">₦890,200</td>
+<td class="px-6 py-4 text-center">
+<button class="p-1 hover:bg-slate-200 dark:hover:bg-slate-700 rounded transition-colors">
+<span class="material-symbols-outlined text-lg">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+<p class="text-xs text-slate-500">Showing 1 to 4 of 1,284 vendors</p>
+<div class="flex gap-2">
+<button class="px-3 py-1 text-xs border border-slate-200 dark:border-slate-700 rounded hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">Previous</button>
+<button class="px-3 py-1 text-xs bg-primary text-white rounded hover:bg-blue-800 transition-colors">Next</button>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col md:flex-row justify-between pt-4 pb-8 border-t border-slate-200 dark:border-slate-800 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+<span>System Status: Optimal - Localized Sync Complete</span>
+<span>© 2023 Delta State Internal Revenue Service • Vendor Management Portal</span>
+</div>
+</div>
+</main>
+<button class="fixed bottom-6 right-6 lg:hidden w-14 h-14 bg-primary text-white rounded-full shadow-xl flex items-center justify-center z-50">
+<span class="material-symbols-outlined">menu</span>
+</button>
+
+</body></html>
